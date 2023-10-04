@@ -6,6 +6,9 @@ R2 holds the cDNA data.
 
 # Required packages
 fastqc
+
 trimgalore - (cutadapt)
+
 hisat2
+
 samtools
