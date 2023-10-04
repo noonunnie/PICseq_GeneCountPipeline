@@ -5,10 +5,10 @@ R1 holds the spatial barcode.
 R2 holds the cDNA data.
 
 # Required packages
-fastqc
+fastqc - https://github.com/s-andrews/FastQC
 
-trimgalore - (cutadapt)
+trimgalore - https://github.com/FelixKrueger/TrimGalore)https://github.com/FelixKrueger/TrimGalore
 
-hisat2
+hisat2 - http://daehwankimlab.github.io/hisat2/download/
 
-samtools
+samtools - https://github.com/samtools/samtools
