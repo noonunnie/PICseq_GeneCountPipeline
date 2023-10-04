@@ -3,3 +3,9 @@ Raw fastq to cnv pipeline for data organized according to spatial transcriptomic
 
 R1 holds the spatial barcode.
 R2 holds the cDNA data.
+
+# Required packages
+fastqc
+trimgalore - (cutadapt)
+hisat2
+samtools
