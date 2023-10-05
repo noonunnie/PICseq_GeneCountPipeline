@@ -1,4 +1,4 @@
-# ST_CNVpipeline
+# PICseq dry lab pipeline
 Raw fastq to cnv pipeline for PICseq data organized akin to spatial transcriptomics (ST) technology.
 
 R1 holds the spatial barcode.
