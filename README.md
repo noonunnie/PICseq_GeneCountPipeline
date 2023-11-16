@@ -21,5 +21,7 @@ umi-tools - https://github.com/CGATOxford/UMI-tools
 
 # Must have downloaded
 .sra sample file(s)
+
 whitelist file of desired barcodes (one row per barcode)
+
 gencode.v34
