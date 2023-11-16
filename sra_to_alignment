@@ -78,5 +78,26 @@ sbatch --ntasks=1 --job-name="$sample" --mem=8gb --time=1:00:00 --wrap="
 
     # quality check
     fastqc aligned/${sample}_aligned.sam -o quality
+    # sam to bam, sort, and index
+    samtools view -@ n -Sb -o aligned/${sample}_aligned.bam aligned/${sample}_aligned.sam
+    samtools sort -o aligned/${sample}_aligned_sorted.bam aligned/${sample}_aligned.bam
+    samtools index aligned/${sample}_aligned_sorted.bam
+
+    featureCounts \
+    -a gencode.v44.chr_patch_hapl_scaff.annotation.gtf \
+    -o aligned/${sample}_gene_assigned \
+    -R BAM aligned/${sample}_aligned_sorted.bam \
+    -T 4
+
+    samtools sort -o  aligned/${sample}_final.bam  aligned/${sample}_aligned_sorted.bam.featureCounts.bam
+    samtools index aligned/${sample}_final.bam
+
+    umi_tools count \
+    --per-gene \
+    --gene-tag=XT \
+    --assigned-status-tag=XS \
+    --per-cell \
+    -I aligned/${sample}_final.bam \
+    -S counts/${sample}_counts_2.tsv.gz
 "
 done
