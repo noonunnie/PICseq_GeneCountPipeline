@@ -1,15 +1,8 @@
-# must have installed/downloaded:
-# .sra sample file(s)
-# whitelist file of desired barcodes
-# gencode.v34
-# cutadapt
-# fastqc
-# trimgalore
-# cutadapt
-# sed
-# umi-tools
-# HISAT2
-# fastqc
+# takes read1 and read2 fastq files and goes trhough pipeline to get feature counts for the cells specified (via barcode) in whitelist
+# make directories below
+# Assumes read data is in a directory called fastq
+# Assumes hg38 index and .gtf file are in current directory
+# See trimgalore path and adjust as needed
 
 # directories
 # m_fastq
@@ -56,8 +49,8 @@ sbatch --ntasks=1 --job-name="$sample" --mem=8gb --time=1:00:00 --wrap="
 
     # edit file (read headers) to work with umi-tools
     # replace .1 or .2 with /1 or /2, save original file as file.bak
-   # sed -E -e '/^[+@]SRR/ s/([.])([12])(\s)/\/\2\3/g' fastq/${input_R1} > m_fastq/${input_R1}
-   # sed -E -e '/^[+@]SRR/ s/([.])([12])(\s)/\/\2\3/g' fastq/${input_R2} > m_fastq/${input_R2}
+sed -E -e '/^[+@]SRR/ s/([.])([12])(\s)/\/\2\3/g' fastq/${input_R1} > m_fastq/${input_R1}
+sed -E -e '/^[+@]SRR/ s/([.])([12])(\s)/\/\2\3/g' fastq/${input_R2} > m_fastq/${input_R2}
     # concatenate UMIs and barcodes to the read headers in the cDNA reads file
     # read 1 and 2 are reversed since for most people read 1 has the cDNA, but for us that is in read2
     # R2_extracted is a file that holds the remainder of the UMI/barcode file and is just for quality control (checking umi-tools)
